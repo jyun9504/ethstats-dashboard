@@ -1,0 +1,19 @@
+.stat-chart {
+  text-align: left;
+  padding: 10px 0;
+
+  &--title {
+    line-height: 30px;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #AAAAAA;
+      padding: 0 10px;
+  }
+
+  &--chart {
+      width: 100%;
+      margin: 0 5px;
+  }
+}

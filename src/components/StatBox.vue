@@ -1,10 +1,10 @@
 <template>
-  <div class="statbox">
-    <div class="statbox--heading">
-      <img class="statbox--heading--icon" :src="require(`@/assets/${iconName}`)" alt="block">
-      <h1 class="statbox--heading--title">{{ title }}</h1>
+  <div class="stat-box">
+    <div class="stat-box--heading">
+      <img class="stat-box--heading--icon" :src="require(`@/assets/${iconName}`)" alt="stat box">
+      <h1 class="stat-box--heading--title">{{ title }}</h1>
     </div>
-    <p class="statbox--details" :style="`color: ${color}`">{{ details }}</p>
+    <p class="stat-box--details" :style="`color: ${color}`">{{ details }}</p>
   </div>
 </template>
 

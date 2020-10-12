@@ -1,11 +1,11 @@
 <template>
-  <div class="statholder">
-    <div class="statholder--left">
-      <img class="statholder--left--icon" :src="require(`@/assets/${iconName}`)" alt="block">
+  <div class="stat-holder">
+    <div class="stat-holder--left">
+      <img class="stat-holder--left--icon" :src="require(`@/assets/${iconName}`)" alt="stat holder">
     </div>
-    <div class="statholder--info u-margin-left-small">
-      <h1 class="statholder--info--title u-margin-bottom-small">{{ title }}</h1>
-      <p class="statholder--info--details" :style="`color: ${color}`">{{ details }}</p>
+    <div class="stat-holder--info u-margin-left-small">
+      <h1 class="stat-holder--info--title u-margin-bottom-small">{{ title }}</h1>
+      <p class="stat-holder--info--details" :style="`color: ${color}`">{{ details }}</p>
     </div>
   </div>
 </template>

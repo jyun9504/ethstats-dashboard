@@ -20,18 +20,35 @@
           />
         </b-col>
       </b-row>
+      <b-row>
+        <b-col md="12" lg="6">
+          <b-row>
+            <b-col sm="12" md="6" class="stat-block" v-for="stat in statChartData" :key="stat.title">
+              <StatChart 
+                :title="stat.title"
+                :chart="stat.chart"
+              />
+            </b-col>
+          </b-row>
+        </b-col>
+        <b-col col class="stat-block" >
+          
+        </b-col>
+      </b-row>
     </b-container>
 </template>
 
 <script>
 import StatHolder from '@/components/StatHolder'
 import StatBox from '@/components/StatBox'
+import StatChart from '@/components/StatChart'
 
 export default {
   name: 'StatSection',
   components: {
     StatHolder,
-    StatBox
+    StatBox,
+    StatChart
   },
   data () {
     return {
@@ -85,6 +102,24 @@ export default {
           title: 'page latency',
           details: '76 ms',
           color: '#7BCC3A'
+        }
+      ],
+      statChartData: [
+        {
+          title: 'block',
+          chart: 'chart-test.png'
+        },
+        {
+          title: 'block',
+          chart: 'chart-test.png'
+        },
+        {
+          title: 'block',
+          chart: 'chart-test.png'
+        },
+        {
+          title: 'block',
+          chart: 'chart-test.png'
         }
       ]
     }
