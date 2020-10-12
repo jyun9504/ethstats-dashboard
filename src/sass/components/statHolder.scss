@@ -1,0 +1,31 @@
+.statholder {
+  display: flex;
+  text-align: left;
+  padding: 15px 0;
+
+  &--left {
+    &--icon {
+      height: 70px;
+      margin: 0 5px;
+    }
+  }
+
+  &--info {
+    white-space: nowrap;
+
+    &--title {
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #AAAAAA;
+      
+    }
+
+    &--details {
+      font-size: 42px;
+      font-weight: 100;
+      letter-spacing: -1px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.statbox {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 10px 0;
+
+  &--heading {
+    display: flex;
+
+    &--icon {
+      height: 30px;
+      margin: 0 5px;
+    }
+    
+    &--title {
+      line-height: 30px;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #AAAAAA;
+      padding: 0 10px;
+    }
+  }
+
+  &--details {
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -1px;
+  }
+}
