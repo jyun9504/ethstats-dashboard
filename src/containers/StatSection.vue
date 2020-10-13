@@ -21,7 +21,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="12" lg="6">
+        <b-col md="12" lg="6" class="stat-block-nosolid">
           <b-row>
             <b-col sm="12" md="6" class="stat-block" v-for="stat in statChartData" :key="stat.title">
               <StatChart 
@@ -31,8 +31,13 @@
             </b-col>
           </b-row>
         </b-col>
-        <b-col col class="stat-block" >
-          
+        <b-col md="12" lg="6" class="stat-block-map u-no-padding">
+          <StatMap :mapImgName="mapImgName"/> 
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="stat-block">
+          <AttentionBar />
         </b-col>
       </b-row>
     </b-container>
@@ -42,13 +47,17 @@
 import StatHolder from '@/components/StatHolder'
 import StatBox from '@/components/StatBox'
 import StatChart from '@/components/StatChart'
+import StatMap from '@/components/StatMap'
+import AttentionBar from '@/components/AttentionBar'
 
 export default {
   name: 'StatSection',
   components: {
     StatHolder,
     StatBox,
-    StatChart
+    StatChart,
+    StatMap,
+    AttentionBar
   },
   data () {
     return {
@@ -106,22 +115,23 @@ export default {
       ],
       statChartData: [
         {
-          title: 'block',
+          title: 'block time',
           chart: 'chart-test.png'
         },
         {
-          title: 'block',
+          title: 'block propagation',
           chart: 'chart-test.png'
         },
         {
-          title: 'block',
+          title: 'uncle count',
           chart: 'chart-test.png'
         },
         {
-          title: 'block',
+          title: 'transactions',
           chart: 'chart-test.png'
         }
-      ]
+      ],
+      mapImgName:'map-test.png'
     }
   }
 }

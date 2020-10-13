@@ -1,6 +1,7 @@
 .stat-chart {
   text-align: left;
   padding: 10px 0;
+  min-height: 140px;
 
   &--title {
     line-height: 30px;
@@ -9,11 +10,9 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       color: #AAAAAA;
-      padding: 0 10px;
   }
 
   &--chart {
       width: 100%;
-      margin: 0 5px;
   }
 }

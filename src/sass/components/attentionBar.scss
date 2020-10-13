@@ -1,0 +1,29 @@
+.attention-bar {
+  display: flex;
+  justify-content: space-between;
+  
+  &--heading {
+    @include flexCenter;
+  }
+
+  &--icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  &--title {
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #AAAAAA;
+    line-height: 30px;
+    padding: 0 10px;
+  }
+
+  &--content {
+    font-size: 14px;
+    color: #FFCA00;
+    @include flexCenter;
+  }
+}
