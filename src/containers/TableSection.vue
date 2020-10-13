@@ -29,7 +29,7 @@
             </span>
           </th>
           <th>
-            <span v-b-tooltip.hover title="peers">
+            <span v-b-tooltip.hover title="Peers">
               <b-icon icon="person" variant="secondary"></b-icon>
             </span>
           </th>
