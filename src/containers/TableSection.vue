@@ -33,16 +33,44 @@
               <b-icon icon="person" variant="secondary"></b-icon>
             </span>
           </th>
+          <th>
+            <span v-b-tooltip.hover title="Pending trasactions">
+              <b-icon icon="basket" variant="secondary"></b-icon>
+            </span>
+          </th>
+          <th>
+            <span v-b-tooltip.hover title="Last block">
+              <b-icon icon="diamond" variant="secondary"></b-icon>
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="data in tableData" :key="data.nodeName">
-          <td><b-icon icon="circle" style="color: #7CCC3A"></b-icon></td>
-          <td>{{data.nodeName}}</td>
-          <td>{{data.nodeType}}</td>
-          <td>{{data.nodeLatency}} ms</td>
-          <td>{{data.isMining}}</td>
-          <td>{{data.peers}}</td>
+          <td @click="handlePriorityClick(data.nodeName)">
+            <b-icon 
+              v-if="priorityDataKey.indexOf(data.nodeName) === -1" 
+              :class="data.active ? 'u-font-color-green' : 'u-font-color-red'" 
+              icon="circle"
+            >
+            </b-icon>
+            <b-icon 
+              v-if="priorityDataKey.indexOf(data.nodeName) !== -1" 
+              :class="data.active ? 'u-font-color-green' : 'u-font-color-red'" 
+              icon="check-circle"
+            >
+            </b-icon>
+          </td>
+          <td :class="data.active ? 'u-font-color-green' : 'u-font-color-red'">{{ data.nodeName }}</td>
+          <td :class="data.active ? 'u-font-color-green' : 'u-font-color-red'">{{ data.nodeType }}</td>
+          <td>{{ data.nodeLatency }} ms</td>
+          <td>
+            <b-icon v-if="data.isMining === false" icon="x-octagon"></b-icon>
+            <p v-if="data.isMining !== false">{{ data.isMining }} ms</p>
+          </td>
+          <td>{{ data.peers }}</td>
+          <td>{{ data.pendingTrasactions }}</td>
+          <td>#{{ $numberSeparator(data.lastBlock) }}</td>
         </tr>
       </tbody>
     </table>
@@ -51,7 +79,7 @@
 
 <script>
 import { BIcon } from 'bootstrap-vue'
-import tableData from './tableData'
+import { numberFormat } from '@/mixins/numberFormatＭixins.js'
 
 export default {
   name: 'TableSection',
@@ -59,10 +87,12 @@ export default {
     BIcon
   },
   data() {
-    return {
-      tableData: tableData
-    }
-  }
+    return {}
+  },
+  props:['tableData','priorityDataKey','handlePriorityClick'],
+  mixins: [numberFormat],
+  mounted() {
+  },
 }
 </script>
 

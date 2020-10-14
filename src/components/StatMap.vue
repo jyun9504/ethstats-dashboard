@@ -2,7 +2,6 @@
   <div class="stat-map">
     <img  class="stat-map--img" :src="require(`@/assets/${mapImgName}`)" alt="map">
   </div>
-  
 </template>
 
 <script>
