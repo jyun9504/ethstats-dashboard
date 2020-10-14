@@ -62,58 +62,6 @@ export default {
   },
   data () {
     return {
-      statHolderData:[
-        {
-          iconName: 'icons8-sugar-cube-100.png',
-          title: 'best block',
-          details: '#11,038,821',
-          color: '#12A0DE'
-        },
-        {
-          iconName: 'icons8-sand-timer-100.png',
-          title: 'last block',
-          details: '10 s ago',
-          color: '#7BCC3A'
-        },
-        {
-          iconName: 'icons8-timer-100.png',
-          title: 'avg block time',
-          details: '13.18s',
-          color: '#FFD162'
-        },
-        {
-          iconName: 'icons8-fire-100.png',
-          title: 'avg network hashrate',
-          details: '302 TH/s',
-          color: '#FF8A00'
-        }
-      ],
-      statBoxData:[
-        {
-          iconName: 'icons8-computer-100.png',
-          title: 'active nodes',
-          details: '78/78',
-          color: '#7BCC3A'
-        },
-        {
-          iconName: 'icons8-price-tag-100.png',
-          title: 'gas price',
-          details: '35 gwei',
-          color: '#12A0DE'
-        },
-        {
-          iconName: 'icons8-price-tag-100.png',
-          title: 'gas limit',
-          details: '12463137 gas',
-          color: '#12A0DE'
-        },
-        {
-          iconName: 'icons8-time-100.png',
-          title: 'page latency',
-          details: '76 ms',
-          color: '#7BCC3A'
-        }
-      ],
       statChartData: [
         {
           title: 'block time',
@@ -134,6 +82,10 @@ export default {
       ],
       mapImgName:'map-test.png'
     }
+  },
+  props: {
+    statHolderData: Object,
+    statBoxData: Object
   }
 }
 </script>
