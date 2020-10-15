@@ -49,13 +49,13 @@
         <tr v-for="data in tableData" :key="data.nodeName">
           <td @click="handlePriorityClick(data.nodeName)">
             <b-icon 
-              v-if="priorityDataKey.indexOf(data.nodeName) === -1" 
+              v-if="priorityNodeName.indexOf(data.nodeName) === -1" 
               :class="data.active ? 'u-font-color-green' : 'u-font-color-red'" 
               icon="circle"
             >
             </b-icon>
             <b-icon 
-              v-if="priorityDataKey.indexOf(data.nodeName) !== -1" 
+              v-if="priorityNodeName.indexOf(data.nodeName) !== -1" 
               :class="data.active ? 'u-font-color-green' : 'u-font-color-red'" 
               icon="check-circle"
             >
@@ -79,7 +79,7 @@
 
 <script>
 import { BIcon } from 'bootstrap-vue'
-import { numberFormat } from '@/mixins/numberFormatＭixins.js'
+import { numberFormat } from '@/mixins/numberFormat.js'
 
 export default {
   name: 'TableSection',
@@ -89,7 +89,7 @@ export default {
   data() {
     return {}
   },
-  props:['tableData','priorityDataKey','handlePriorityClick'],
+  props:['tableData','priorityNodeName','handlePriorityClick'],
   mixins: [numberFormat],
   mounted() {
   },

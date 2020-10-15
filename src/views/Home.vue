@@ -6,7 +6,7 @@
     />
     <TableSection 
       :tableData="tableData"
-      :priorityDataKey="priorityDataKey"
+      :priorityNodeName="priorityNodeName"
       :handlePriorityClick="handlePriorityClick"
     />
   </div>
@@ -15,7 +15,7 @@
 <script>
 import StatSection from '@/containers/StatSection.vue'
 import TableSection from '@/containers/TableSection.vue'
-import { numberFormat } from '@/mixins/numberFormatＭixins.js'
+import { numberFormat } from '@/mixins/numberFormat.js'
 
 export default {
   name: 'Home',
@@ -26,10 +26,9 @@ export default {
   mixins: [numberFormat],
   data() {
     return {
-      timing: null,
-      lastBlockCount: 0,
-      tableData: null,
-      priorityDataKey: [],
+      timing: 0,
+      tableData: {},
+      priorityNodeName: [],
       statHolderData:[
         {
           iconName: 'icons8-sugar-cube-100.png',
@@ -40,13 +39,13 @@ export default {
         {
           iconName: 'icons8-sand-timer-100.png',
           title: 'last block',
-          details: 0,
+          details: null,
           color: '#7BCC3A'
         },
         {
           iconName: 'icons8-timer-100.png',
           title: 'avg block time',
-          details: '0.00 s',
+          details: null,
           color: '#FFD162'
         },
         {
@@ -85,57 +84,20 @@ export default {
     }
   },
   created() {
-    this.initWebSocket()
-
+    this.$websocket.new('ws://localhost:3000', this.socketOnMessage)
   },
   destroyed() {
-    this.websock.close()
+    this.$websocket.close()
   },
   methods: {
-    initWebSocket() {
-      this.websock = new WebSocket('ws://localhost:3000')
-      this.websock.onopen = () => {
-        console.log('open connection')
-      }
-      this.websock.onmessage = event => {
-        let tableData = JSON.parse(event.data)
-        this.initSort(tableData)
-        this.calcStatData(tableData)
-        this.handleLastBlock()
-      }
-      this.websock.onclose = () => {
-        console.log('close connection')
-      }
-    },
-    initSort(tableData) {
-      tableData = tableData.sort((a, b) => {
-        return a.lastBlock < b.lastBlock ? 1 : -1
-      })
-      this.prioritySort(tableData)
-    },
-    prioritySort(tableData) {
-      let priorityData = tableData.filter(el => {
-        return this.priorityDataKey.indexOf(el.nodeName) >= 0
-      }) 
-      const filterData = tableData.filter(el => {
-        return this.priorityDataKey.indexOf(el.nodeName) < 0
-      }) 
-      priorityData = priorityData.concat(filterData)
-      this.tableData = priorityData
-    },
-    handlePriorityClick(key) {
-      if(this.priorityDataKey.indexOf(key) === -1){
-        this.priorityDataKey.push(key)
-      } else {
-        this.priorityDataKey.splice(this.priorityDataKey.indexOf(key), 1)
-      }
-      this.initSort(this.tableData)
+    socketOnMessage(socketData) {
+      this.initSort(socketData)
+      this.calcStatData(socketData)
     },
     calcStatData() {
-      if(this.tableData) {
-        this.handleBestBlock()
-        this.handleActiveNodes()
-      }
+      this.handleBestBlock()
+      this.handleLastBlock()
+      this.handleActiveNodes()
     },
     handleBestBlock() {
       const bestBlock = Math.max.apply(null, this.tableData.map(el => {
@@ -150,13 +112,38 @@ export default {
       this.statBoxData[0].details = activeNodeAmount + '/' + this.tableData.length 
     },
     handleLastBlock() {
-      this.lastBlockCount = 0
+      let lastBlockCount = 0
       clearInterval(this.timing)
       this.statHolderData[1].details = '0s ago'
       this.timing = setInterval(() => {
-        this.lastBlockCount++
-        this.statHolderData[1].details = this.lastBlockCount + 's ago'
+        lastBlockCount++
+        this.statHolderData[1].details = lastBlockCount + 's ago'
       }, 1000)
+    },
+    
+    initSort(socketData) {
+      socketData = socketData.sort((a, b) => {
+        return a.lastBlock < b.lastBlock ? 1 : -1
+      })
+      this.prioritySort(socketData)
+    },
+    prioritySort(socketData) {
+      let priorityData = socketData.filter(el => {
+        return this.priorityNodeName.indexOf(el.nodeName) >= 0
+      }) 
+      const filterData = socketData.filter(el => {
+        return this.priorityNodeName.indexOf(el.nodeName) < 0
+      }) 
+      priorityData = priorityData.concat(filterData)
+      this.tableData = priorityData
+    },
+    handlePriorityClick(nodeName) {
+      if(this.priorityNodeName.indexOf(nodeName) === -1){
+        this.priority.push(nodeName)
+      } else {
+        this.priority.splice(this.priority.indexOf(nodeName), 1)
+      }
+      this.initSort(this.tableData)
     }
   }
 }

@@ -84,8 +84,8 @@ export default {
     }
   },
   props: {
-    statHolderData: Object,
-    statBoxData: Object
+    statHolderData: Array,
+    statBoxData: Array
   }
 }
 </script>
